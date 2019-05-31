@@ -1,7 +1,7 @@
-var quiztitle = "Question :";
+var quiztitle = "Social Security Quiz";
 
-
-var quiz = [
+var quiz = 
+[
        {
            "question" : "Q1: Qui inventa la théorie de la relativité ?",
            "image" : "http://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Albert_Einstein_Head.jpg/220px-Albert_Einstein_Head.jpg",
@@ -13,7 +13,7 @@ var quiz = [
                                ],
            "correct" : "Albert Einstein",
            "explanation" : "Albert Einstein présenta sa théorie de la relativité en 1905.",
-       },            "image" : "http://besuccess.com/wp-content/uploads/2012/05/chrome-firefox-internet-explorer.jpg",
+       },            
        {
            "question" : "Q2: Qui est la personne sur le billet de 2$ ",
            "image" : "http://upload.wikimedia.org/wikipedia/commons/thumb/9/94/US_%242_obverse-high.jpg/320px-US_%242_obverse-high.jpg",
@@ -348,6 +348,7 @@ var quiz = [
    ];
 
 
+
 var currentquestion = 0,
     score = 0,
     submt = true,
@@ -393,16 +394,28 @@ jQuery(document).ready(function ($) {
 
     function processQuestion(choice) {
         if (quiz[currentquestion]['choices'][choice] == quiz[currentquestion]['correct']) {
-            $('.choice').eq(choice).css({'background-color': '#50D943'});
+            $('.choice').eq(choice).css({
+                'background-color': '#50D943'
+            });
             $('#explanation').html('<strong>Correct!</strong> ' + htmlEncode(quiz[currentquestion]['explanation']));
             score++;
-            // Passage au niveau suivant, point pour le joueur qui à répondu
         } else {
-            $('.choice').eq(choice).css({'background-color': '#D92623'});
+            $('.choice').eq(choice).css({
+                'background-color': '#D92623'
+            });
             $('#explanation').html('<strong>Incorrect.</strong> ' + htmlEncode(quiz[currentquestion]['explanation']));
-            // Passage au niveau suivant, pas de point pour le joueur
         }
         currentquestion++;
+        $('#submitbutton').html('NEXT QUESTION &raquo;').on('click', function () {
+            if (currentquestion == quiz.length) {
+                endQuiz();
+            } else {
+                $(this).text('Check Answer').css({
+                    'color': '#222'
+                }).off('click');
+                nextQuestion();
+            }
+        })
     }
 
 
@@ -439,7 +452,7 @@ jQuery(document).ready(function ($) {
     }
 
 
-    /*function endQuiz() {
+    function endQuiz() {
         $('#explanation').empty();
         $('#question').empty();
         $('#choice-block').empty();
@@ -449,7 +462,7 @@ jQuery(document).ready(function ($) {
             'text-align': 'center',
             'font-size': '4em'
         }).text(Math.round(score / quiz.length * 100) + '%').insertAfter('#question');
-    }*/
+    }
 
 
     function init() {
@@ -461,7 +474,7 @@ jQuery(document).ready(function ($) {
         }
 
         //add pager and questions
-        /*if (typeof quiz !== "undefined" && $.type(quiz) === "array") {
+        if (typeof quiz !== "undefined" && $.type(quiz) === "array") {
             //add pager
             $(document.createElement('p')).addClass('pager').attr('id', 'pager').text('Question 1 of ' + quiz.length).appendTo('#frame');
             //add first question
@@ -486,7 +499,7 @@ jQuery(document).ready(function ($) {
             }).appendTo('#frame');
 
             setupButtons();
-        }*/
+        }
     }
 
     init();
