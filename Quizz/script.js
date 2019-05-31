@@ -348,7 +348,6 @@ var quiz =
    ];
 
 
-
 var currentquestion = 0,
     score = 0,
     submt = true,
@@ -432,7 +431,8 @@ jQuery(document).ready(function ($) {
     }
 
 
-    function init() { // Remplacer tout ça par les données obtenues d'un seul objet du tableau, selectionné avec le math random.
+    function init() { 
+        ObjetRandom();
  
     }
     
@@ -490,6 +490,6 @@ jQuery(document).ready(function ($) {
 
 
 
-    ObjetRandom();
+
     init();
 });
