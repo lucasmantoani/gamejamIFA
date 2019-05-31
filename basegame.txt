@@ -1,0 +1,31 @@
+plateau : phaser
+deux joueurs, deux series d'event listener
+une porte magique/ trou noir / Merlin l'enchanteur : Event listener Javascript
+
+
+
+
+Questions : 10 Questions à deux réponses possibles
+
+    Année de fondation de l'IFA ? 1986 / 1996
+    Nombre de formations disponibles à l'IFA ? 20 / 30
+
+
+    Nom de l'inventeur de Linux ? LINUS TORVALD / STEVE JOBS
+    Créateur de JAVA ?  Sun Microsystems / Oracle
+    Signification de AJAX ? asynchronous JavaScript and XML / asynchronous Javascript and XHTTP
+
+    Prochains jeux olympiques ? JAPON / PARIS
+    Gagnant du dernier Roland Garros ? NADAL / FEDERER
+
+
+    Le second homme sur la lune ? BUZZ ALDRIN / NEIL ARMSTRONG
+    Dirigeant de l'URSS de 1920 à 1953 ? STALINE / LENINE
+
+    Année du premier vaccin contre la rage ? 1885 / 1922
+    Année de découverte du Radium ? 1898 / 1920
+    Année d'envoi de Mars Pathfinder ? 1997 / 2004
+
+
+
+    
