@@ -371,26 +371,6 @@ jQuery(document).ready(function ($) {
         }
     }
 
-    function nextQuestion() {
-        submt = true;
-        $('#explanation').empty();
-        $('#question').text(quiz[currentquestion]['question']);
-        $('#pager').text('Question ' + Number(currentquestion + 1) + ' of ' + quiz.length);
-        if (quiz[currentquestion].hasOwnProperty('image') && quiz[currentquestion]['image'] != "") {
-            if ($('#question-image').length == 0) {
-                $(document.createElement('img')).addClass('question-image').attr('id', 'question-image').attr('src', quiz[currentquestion]['image']).attr('alt', htmlEncode(quiz[currentquestion]['question'])).insertAfter('#question');
-            } else {
-                $('#question-image').attr('src', quiz[currentquestion]['image']).attr('alt', htmlEncode(quiz[currentquestion]['question']));
-            }
-        } else {
-            $('#question-image').remove();
-        }
-        addChoices(quiz[currentquestion]['choices']);
-        setupButtons();
-
-
-    }
-
 
     function processQuestion(choice) {
         if (quiz[currentquestion]['choices'][choice] == quiz[currentquestion]['correct']) {
@@ -413,7 +393,7 @@ jQuery(document).ready(function ($) {
                 $(this).text('Check Answer').css({
                     'color': '#222'
                 }).off('click');
-                nextQuestion();
+                
             }
         })
     }
@@ -452,46 +432,49 @@ jQuery(document).ready(function ($) {
     }
 
 
-    function endQuiz() {
-        $('#explanation').empty();
-        $('#question').empty();
-        $('#choice-block').empty();
-        $('#submitbutton').remove();
-        $('#question').text("You got " + score + " out of " + quiz.length + " correct.");
-        $(document.createElement('h2')).css({
-            'text-align': 'center',
-            'font-size': '4em'
-        }).text(Math.round(score / quiz.length * 100) + '%').insertAfter('#question');
+    function init() { // Remplacer tout ça par les données obtenues d'un seul objet du tableau, selectionné avec le math random.
+ 
     }
+    
 
+    function ObjetRandom() // Selectionne un objet random dans la liste, 10 objets par fourchettes de 3
+    {
+        var min = 0;
+        var max = 3;
+        var nbDeTours = 0;
+    
+        console.log(min);
+        console.log(max);
+    
+        function getRandomFloat(min, max) {
+            return Math.round(Math.random() * (max - min) + min);
+          }
+    
+        var random = getRandomFloat(min,max);
 
-    function init() {
-        //add title
-        if (typeof quiztitle !== "undefined" && $.type(quiztitle) === "string") {
-            $(document.createElement('h1')).text(quiztitle).appendTo('#frame');
-        } else {
-            $(document.createElement('h1')).text("Quiz").appendTo('#frame');
-        }
+          for (let index = min; index < 1; index++) 
+          {
+            console.log(quiz[random]);
+            // Affichage de l'objet dans le DOM :
 
-        //add pager and questions
-        if (typeof quiz !== "undefined" && $.type(quiz) === "array") {
-            //add pager
-            $(document.createElement('p')).addClass('pager').attr('id', 'pager').text('Question 1 of ' + quiz.length).appendTo('#frame');
-            //add first question
-            $(document.createElement('h2')).addClass('question').attr('id', 'question').text(quiz[0]['question']).appendTo('#frame');
-            //add image if present
-            if (quiz[0].hasOwnProperty('image') && quiz[0]['image'] != "") {
-                $(document.createElement('img')).addClass('question-image').attr('id', 'question-image').attr('src', quiz[0]['image']).attr('alt', htmlEncode(quiz[0]['question'])).appendTo('#frame');
+            $('.question').text(quiz[random]['question']).appendTo('#frame');
+
+            //Ajoute une image si elle est présente
+
+            if (quiz[0].hasOwnProperty('image') && quiz[0]['image'] != "") 
+            {
+                $(document.createElement('img')).addClass('question-image').attr('id', 'question-image').attr('src', quiz[random]['image']).attr('alt', htmlEncode(quiz[random]['question'])).appendTo('#frame');
             }
-            $(document.createElement('p')).addClass('explanation').attr('id', 'explanation').html('&nbsp;').appendTo('#frame');
+            //conteneur des réponses possibles : ul
 
-            //questions holder
             $(document.createElement('ul')).attr('id', 'choice-block').appendTo('#frame');
 
-            //add choices
-            addChoices(quiz[0]['choices']);
+            //Ajoute les réponses possible (fonction qui génére les li)
 
-            //add submit button
+            addChoices(quiz[random]['choices']);
+
+            //Ajout du bouton submit
+
             $(document.createElement('div')).addClass('choice-box').attr('id', 'submitbutton').text('Check Answer').css({
                 'font-weight': 700,
                 'color': '#222',
@@ -499,8 +482,14 @@ jQuery(document).ready(function ($) {
             }).appendTo('#frame');
 
             setupButtons();
-        }
+              random+=3;
+              // Ajouter de la récursivité ? 
+          }
     }
 
+
+
+
+    ObjetRandom();
     init();
 });
